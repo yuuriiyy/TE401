@@ -1,0 +1,11 @@
+{
+    "BinanceKeys":{
+        "API_Key" : "FAFw8yQRxHk8oquOG2eae8M7XMZQIPDr1GmSWNhfBgttlKn8W1OyHNjg9qPGcUyk",
+        "Secret_Key" : "D1lT0IIE1kJUyWJR2bRo5VM2Qu7jHjiFnl9Gr7gHwSmUVixMvPxCcJWXnEsSNUmU"
+    },
+    "Tokens":{
+        "BUSD" : "",
+        "ETH" : "",
+        "BTCB" : ""
+    }
+}
