@@ -5,10 +5,10 @@ import requests
 import sqlite3
 import json
 import numpy as np
+import datetime
 from urllib.parse import urlencode
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from datetime import datetime, timedelta
 from um_futures import send_public_request, send_signed_request, dispatch_request
 
 # ... (Your existing code for API key setup and request functions)
@@ -16,7 +16,7 @@ from um_futures import send_public_request, send_signed_request, dispatch_reques
 # SQLite database connection setup
 conn = sqlite3.connect('funding_rate_database.db')
 cursor = conn.cursor()
-symbol = 'BTC'
+symbol = 'USDT'
 
 # Create a table to store funding rates if not exists
 cursor.execute(f'''
@@ -40,43 +40,29 @@ def save_funding_rate_to_db(symbol, data):
 # Function to fetch and save funding rates
 def fetch_and_save_funding_rate(symbol):
     response = send_signed_request("GET", "/fapi/v1/premiumIndex", {"symbol": symbol})
-    funding_rate = float(response['lastFundingRate'])
-    timestamp = int(response['time'] / 1000)  # Convert milliseconds to seconds
-
+    # response = send_signed_request("GET", "/fapi/v1/fundingRate", {"symbol": symbol, "limit": 15})
     print(response)
-    # save_funding_rate_to_db(symbol, data)
-    print(f"Funding rate for {symbol}: {funding_rate} (Timestamp: {timestamp})")
+
+start_date = '2024-03-01'
+end_date = '2024-03-02'
+start = int(datetime.datetime.strptime(start_date, '%Y-%m-%d').timestamp() * 1000)
+end = int(datetime.datetime.strptime(end_date, '%Y-%m-%d').timestamp() * 1000)
+def fetch_funding_rate_with_limit(symbol, limit = 10):
+    data = send_signed_request("GET", "/fapi/v1/fundingRate", {"symbol": symbol, "limit": limit})
+    funding_rates = [float(entry['fundingRate']) for entry in data]
+    funding_rate_10MA = sum(funding_rates) / limit
+    response = send_signed_request("GET", "/fapi/v1/premiumIndex", {"symbol": symbol})
+    current_funding_rate = float(response["lastFundingRate"])
+    if(current_funding_rate > funding_rate_10MA):
+        print(True)
+    else:
+        print(False)
+    # response = send_signed_request("GET", "/fapi/v1/fundingRate", {"symbol": symbol, "startTime": start, "endTime": end, "limit": limit})
+    # print(funding_rates)
+
 
 # Fetch and save funding rates for a specific symbol (e.g., 'BTCUSDT')
-fetch_and_save_funding_rate('BTCUSDT')
+# fetch_and_save_funding_rate('BTCUSDT')
+fetch_funding_rate_with_limit('BTCUSDT', limit = 10)
 
-# Function to predict future funding rates using linear regression
-# def predict_future_funding_rate(symbol, days=1):
-#     # Fetch historical data from the database
-#     cursor.execute('''
-#         SELECT timestamp, funding_rate
-#         FROM funding_rates
-#         WHERE symbol = ?
-#         ORDER BY timestamp ASC
-#     ''', (symbol,))
-#     data = cursor.fetchall()
-
-#     # Prepare data for training
-#     timestamps = np.array([entry[0] for entry in data]).reshape(-1, 1)
-#     funding_rates = np.array([entry[1] for entry in data])
-
-#     # Train linear regression model
-#     model = LinearRegression()
-#     model.fit(timestamps, funding_rates)
-
-#     # Predict future funding rate
-#     future_timestamp = int((datetime.utcnow() + timedelta(days=days)).timestamp())
-#     predicted_funding_rate = model.predict([[future_timestamp]])[0]
-
-#     print(f"Predicted funding rate for {symbol} in {days} days: {predicted_funding_rate}")
-
-# # Predict future funding rate for 'BTCUSDT' in 7 days
-# predict_future_funding_rate('BTCUSDT', days=7)
-
-# Close the SQLite connection
 conn.close()

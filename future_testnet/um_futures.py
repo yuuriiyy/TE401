@@ -60,6 +60,7 @@ def dispatch_request(http_method):
 
 # used for sending request requires the signature
 def send_signed_request(http_method, url_path, payload={}):
+    BASE_URL = "https://testnet.binancefuture.com"
     query_string = urlencode(payload)
     # replace single quote to double quote
     query_string = query_string.replace("%27", "%22")
@@ -99,15 +100,12 @@ def send_public_request(url_path, payload={}):
 
 
 
-# response = send_signed_request("GET", "/fapi/v1/premiumIndex",{"symbol": "BTCUSDT"})
-# # print(response)
-# print(response['lastFundingRate'])
-
-
-# get account informtionf
-# if you can see the account details, then the API key/secret is correct
-# response = send_signed_request("GET", "/fapi/v2/account")
+response = send_signed_request("GET", "/fapi/v1/premiumIndex",{"symbol": "BTCUSDT"})
 # print(response)
+print(response['lastFundingRate'])
+print(response["indexPrice"])
+price  = round(float(response["indexPrice"]), 0)
+
 
 
 ### USER_DATA endpoints, call send_signed_request #####
@@ -115,16 +113,22 @@ def send_public_request(url_path, payload={}):
 # if you see order response, then the parameters setting is correct
 # if it has response from server saying some parameter error, please adjust the parameters according the market.
 # params = {
-#     "symbol": "ETHUSDT",
+#     "symbol": "BTCUSDT",
 #     "side": "BUY",
 #     "type": "LIMIT",
 #     "timeInForce": "GTC",
-#     "quantity": 0.2,
-#     "price": "2870",
+#     "quantity": 0.01,
+#     "price": price,
 # }
 # response = send_signed_request("POST", "/fapi/v1/order", params)
 # print(response)
 
+
+
+# get account informtionf
+# if you can see the account details, then the API key/secret is correct
+response = send_signed_request("GET", "/fapi/v2/account")
+print(response)
 # place batch orders
 # if you see order response, then the parameters setting is correct
 # if it has response from server saying some parameter error, please adjust the parameters according the market.

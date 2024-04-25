@@ -106,14 +106,14 @@ db_connection = create_connection("funding_rate_database.db")
 coins = ['BTC'] #, 'ETH', 'XRP', 'ADA', 'DOT', 'LINK', 'LTC', 'BCH', 'XLM', 'UNI']
 exchange = ccxt.binance()
 start_date = '2024-03-01'
-end_date = '2024-03-05'
+end_date = '2024-03-21'
 
 results = {}
 for coin in coins:
     spot_symbol = f"{coin}/USDT"
     contract_symbol = f"{coin}/USDT:USDT"
     results[coin] = fetch_and_merge_data(spot_symbol, contract_symbol, exchange, start_date, end_date)
-
+    print(results[coin])
     # Convert timestamp to readable date
     results[coin].index = pd.to_datetime(results[coin].index, unit='ms')
 
@@ -133,6 +133,9 @@ for coin in coins:
 
     # Insert data into the table
     insert_data(db_connection, coin, data_to_insert)
+
+
+
 
 # Close the database connection
 db_connection.close()

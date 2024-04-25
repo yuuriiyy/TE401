@@ -31,4 +31,8 @@ if __name__ == "__main__":
     account = binance_connect.query_account(api_key, secret_key)
     print(account['balances'][1])
     print(account['balances'][4])
+    # print(account)
+
+    response = binance_connect.query_testnet()
+    print(response)
 

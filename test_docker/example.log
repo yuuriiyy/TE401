@@ -1,0 +1,22 @@
+2024-04-04 08:41:09,876 - INFO - time: 1712238069000 ,funding rate: 0.00066418
+2024-04-04 08:41:27,341 - INFO - time: 1712238087000 ,funding rate: 0.00066418
+2024-04-04 08:41:45,238 - INFO - time: 1712238105000 ,funding rate: 0.00066418
+2024-04-04 08:42:01,579 - INFO - time: 1712238121000 ,funding rate: 0.00069356
+2024-04-04 08:42:12,913 - INFO - time: 1712238132000 ,funding rate: 0.00069356
+2024-04-04 08:42:12,913 - INFO - signal: False
+2024-04-04 08:42:29,876 - INFO - time: 1712238149000 ,funding rate: 0.00069356
+2024-04-04 08:42:29,877 - INFO - signal: False
+2024-04-17 22:02:38,169 - INFO - time: 1713409358000 ,funding rate: 0.003
+2024-04-17 22:02:38,170 - INFO - signal: True
+2024-04-17 22:02:54,612 - INFO - time: 1713409374000 ,funding rate: 0.003
+2024-04-17 22:02:54,614 - INFO - signal: True
+2024-04-17 23:51:42,236 - INFO - time: 1713415902000 ,funding rate: 0.003
+2024-04-17 23:51:42,237 - INFO - signal: True
+2024-04-17 23:53:02,692 - INFO - time: 1713415982022 ,funding rate: 0.003
+2024-04-17 23:53:02,692 - INFO - signal: True
+2024-04-17 23:56:31,138 - INFO - time: 1713416191000 ,funding rate: 0.003
+2024-04-17 23:56:31,139 - INFO - signal: True
+2024-04-17 23:56:33,979 - INFO - {'symbol': 'BTCUSDT', 'orderId': 2299694, 'orderListId': -1, 'clientOrderId': 'lTUmN2FoVuYu6CNRAB7ULF', 'transactTime': 1713416194117, 'price': '61675.88000000', 'origQty': '0.01000000', 'executedQty': '0.00000000', 'cummulativeQuoteQty': '0.00000000', 'status': 'NEW', 'timeInForce': 'GTC', 'type': 'LIMIT', 'side': 'BUY', 'workingTime': 1713416194117, 'fills': [], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
+2024-04-17 23:56:55,508 - INFO - time: 1713416215000 ,funding rate: 0.003
+2024-04-17 23:56:55,509 - INFO - signal: True
+2024-04-17 23:56:57,909 - INFO - {'symbol': 'BTCUSDT', 'orderId': 2299823, 'orderListId': -1, 'clientOrderId': 'njbuPeq1Kxi3cQMzyMnNmH', 'transactTime': 1713416218050, 'price': '61675.88000000', 'origQty': '0.01000000', 'executedQty': '0.00000000', 'cummulativeQuoteQty': '0.00000000', 'status': 'NEW', 'timeInForce': 'GTC', 'type': 'LIMIT', 'side': 'BUY', 'workingTime': 1713416218050, 'fills': [], 'selfTradePreventionMode': 'EXPIRE_MAKER'}
